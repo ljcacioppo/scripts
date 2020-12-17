@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#Run adobe-licensing-toolkit to deactivate SDL licenses
+
+sudo /tmp/adobe-licensing-toolkit --deactivate
+
+#Remove Operating Configs
+rm -rf /Library/Application\ Support/Adobe/OperatingConfigs/*
+
+#Remove Service Config
+rm -rf /Library/Application\ Support/Adobe/OOBE/Configs/ServiceConfig.xml
+
