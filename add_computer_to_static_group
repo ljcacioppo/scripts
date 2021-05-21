@@ -5,8 +5,7 @@ function DecryptString() {
 	echo "${1}" | /usr/bin/openssl enc -aes256 -d -a -A -S "${2}" -k "${3}"
 }
 
-jamfUser=""
-jamfPass=$(DecryptString $5 'salt' 'passphrase')
+authorizations=$(DecryptString $5 'salt' 'passphrase')
 jamfURL=""
 
 #Get the serial number
@@ -21,7 +20,7 @@ apiData="<computer_group><id>${groupID}</id><name>$groupName</name><computer_add
 
 #Add Computer to Static Group
 /usr/bin/curl -sk \
---user "$jamfUser":"$jamfPass" \
+--header "authorization: Basic $authorization" \
 --header "Content-Type: text/xml" \
 -d "${xmlHeader}${apiData}" \
 --request PUT \
